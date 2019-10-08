@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import Decks from './components/Decks';
+import { currentDecks } from './utils/CurrentDecks';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu',
 });
 
+
+
 export default class App extends Component {
+
+  state = { decks:{}};
+
+  componentDidMount() {
+    let decks = ((currentDecks()).decks);
+    this.setState({decks:decks});
+  }
+
   render() {
+    let { decks } = this.state;
     return (
       <View style={styles.container}>
-        <Decks />
+        <Decks decks={decks} />
+        {/* <Text>{JSON.stringify(decks)}</Text> */}
       </View>
     );
   }

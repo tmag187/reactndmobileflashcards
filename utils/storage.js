@@ -13,3 +13,10 @@ export function saveDeck(title) {
         
     })
 }
+
+export function setDecks() {
+    AsyncStorage.mergeItem(DECK_STORAGE_KEY, title)
+    .then ((results) => {
+        
+    })
+}

@@ -3,9 +3,12 @@ import { View, Text } from 'react-native';
 
  class Deck extends Component {
     render() {
+        let { deck } = this.props;
+        let questCount = deck.questions.length;
         return (
             <View>
-                <Text> Deck Number 1</Text>
+                <Text>{deck.title}</Text>
+                <Text>{questCount} questions</Text>
             </View>
         )
     }
