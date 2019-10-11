@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Deck;
+export default DeckDetails;
