@@ -5,6 +5,7 @@ import { currentDecks } from './utils/CurrentDecks';
 import  DeckDetails  from './components/DeckDetails';
 import AddDeck from './components/AddDeck';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
+import { getDecks } from './utils/storage';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -16,7 +17,7 @@ class Home extends Component {
   state = { decks:{}};
 
   componentDidMount() {
-    let decks = ((currentDecks()).decks);
+    let decks = getDecks();
     this.setState({decks:decks});
   }
 
