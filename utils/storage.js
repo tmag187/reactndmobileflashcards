@@ -2,12 +2,14 @@ import { AsyncStorage } from 'react-native';
 import { currentDecks } from './CurrentDecks';
 let DECK_STORAGE_KEY = '10111';
 
+let decks;
 export function getDecks() {
     /* AsyncStorage.getItem(DECK_STORAGE_KEY)
     .then ((results) => {
 
     } */
-    return ((currentDecks()).decks);
+    decks = (currentDecks()).decks;
+    return (decks);
 }
 
 export function saveDeck(title) {
@@ -20,7 +22,8 @@ export function saveDeck(title) {
         title: {
             title,
             "questions": [] } }
-    return ({ ...decks, newDeck })
+    decks = { ...decks, newDeck }
+    return (decks);
 }
 
 export function setDecks(title) {

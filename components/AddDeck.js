@@ -11,9 +11,9 @@ import { saveDeck } from '../utils/storage';
    };
 
    submit = () => {
-    const { deckName } = this.state;
-   // this.toHome();
+    const { deckName } = this.state; 
     saveDeck(deckName);
+    this.props.navigation.navigate('DeckDetails');
  }
 
    render() {

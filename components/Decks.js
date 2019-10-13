@@ -8,7 +8,8 @@ import  Deck from './Deck';
      console.log(e.target.value);
      let { clickCount } = this.state;
      clickCount++;
-     this.setState({clickCount})
+     this.setState({clickCount});
+     this.props.navigation.navigate('DeckDetails');
    }
     render() {
         let { decks } = this.props;
