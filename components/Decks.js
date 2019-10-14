@@ -9,7 +9,7 @@ import  Deck from './Deck';
      let { clickCount } = this.state;
      clickCount++;
      this.setState({clickCount});
-     this.props.navigation.navigate('DeckDetails');
+     this.props.navigation.navigate('Details');
    }
     render() {
         let { decks } = this.props;
@@ -24,7 +24,7 @@ import  Deck from './Deck';
                 
                   <FlatList 
                    data={Object.values(decks)}
-                   renderItem={({item}) => <Deck style={styles.item} deck={(Object.values(item)[0])} onClick={this.selectDeck} />}
+                   renderItem={({item}) => <Deck style={styles.item} deck={(Object.values(item)[0])} onPress={this.selectDeck} />}
                 />
                 <Text>{clickCount}</Text>
             </View>

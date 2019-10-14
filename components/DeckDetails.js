@@ -1,29 +1,38 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 
  class DeckDetails extends Component {
+
+    submit = () => {
+        
+    }
+
+    startQuiz = () => {
+        this.props.navigation.navigate('Quiz'); 
+    }
+
     render() {
         const { deck } = this.props;
         return (
             <View style={styles.container} >
-                <Text>Deck Detail</Text>
+                <Text style={styles.item}>Deck Detail</Text>
                 <TouchableOpacity
-           /* style={
+            style={
              Platform.OS === "ios"
                ? styles.iosSubmitBtn
                : styles.AndroidSubmitBtn
-           } */
+           } 
            onPress={this.submit}
          >
            <Text style={styles.submitBtnText}>Add Card</Text>
          </TouchableOpacity>
          <TouchableOpacity
-           /* style={
+            style={
              Platform.OS === "ios"
                ? styles.iosSubmitBtn
                : styles.AndroidSubmitBtn
-           } */
-           onPress={this.submit}
+           } 
+           onPress={this.startQuiz}
          >
            <Text style={styles.submitBtnText}>Take Quiz</Text>
          </TouchableOpacity>
@@ -43,7 +52,21 @@ const styles = StyleSheet.create({
     height: 44,
   },
   submitBtnText: {
-    color: white,
+    color: 'white',
+    fontSize: 22,
+    textAlign: 'center',
+  },
+  iosSubmitBtn: {
+    backgroundColor: 'red',
+    padding: 10,
+    borderRadius: 7,
+    height: 45,
+    marginLeft: 40,
+    marginTop: 40,
+    marginRight: 40,
+  },
+  heading: {
+    color: 'black',
     fontSize: 22,
     textAlign: 'center',
   }

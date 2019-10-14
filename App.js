@@ -39,7 +39,8 @@ const HomeStack = createStackNavigator({
 
 const AddDeckStack = createStackNavigator({
   AddDeck: { screen : AddDeck },
-  Details: { screen: DeckDetails}
+  Details: { screen: DeckDetails},
+  Quiz: { screen: Quiz}
 });
 
 const tabNavigator = createBottomTabNavigator({
