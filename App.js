@@ -5,6 +5,7 @@ import { currentDecks } from './utils/CurrentDecks';
 import  DeckDetails  from './components/DeckDetails';
 import AddDeck from './components/AddDeck';
 import Quiz from './components/Quiz';
+import AddQuestion from './components/AddQuestion';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
 import { getDecks } from './utils/storage';
 
@@ -41,7 +42,8 @@ const HomeStack = createStackNavigator({
 const AddDeckStack = createStackNavigator({
   AddDeck: { screen : AddDeck },
   Details: { screen: DeckDetails},
-  Quiz: { screen: Quiz}
+  Quiz: { screen: Quiz},
+  AddQuestion: { screen: AddQuestion }
 });
 
 const tabNavigator = createBottomTabNavigator({

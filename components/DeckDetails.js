@@ -7,6 +7,10 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native
         
     }
 
+    takeQuiz = () => {
+      this.props.navigation.navigate('Quiz'); 
+    }
+
     render() {
         const { params } = this.props.navigation.state;
         let deck = params.deck;
@@ -31,7 +35,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native
                ? styles.iosSubmitBtn
                : styles.AndroidSubmitBtn
            } 
-           onPress={this.submit}
+           onPress={this.takeQuiz}
          >
            <Text style={styles.submitBtnText}>Take Quiz</Text>
          </TouchableOpacity>
