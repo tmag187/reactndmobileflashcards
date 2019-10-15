@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, TextInput, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { saveDeck } from '../utils/storage';
 
  class AddDeck extends Component {
@@ -12,29 +12,29 @@ import { saveDeck } from '../utils/storage';
 
    submit = () => {
     const { deckName } = this.state; 
-    saveDeck(deckName);
-    this.props.navigation.navigate('DeckDetails');
+    let decks = saveDeck(deckName);
+    this.props.navigation.navigate('Home');
  }
 
    render() {
      const { deckName } = this.state;
      return (
        <View>
-         <Text>Add Deck</Text>
+         <Text style={inputstyles.item}>Add Deck</Text>
          <TextInput
            style={inputstyles.addquestioninput}
            value={deckName}
            onChangeText={this.updateName}
          />
          <TouchableOpacity
-           /* style={
+            style={
              Platform.OS === "ios"
-               ? styles.iosSubmitBtn
-               : styles.AndroidSubmitBtn
-           } */
+               ? inputstyles.iosSubmitBtn
+               : inputstyles.AndroidSubmitBtn
+           } 
            onPress={this.submit}
          >
-           <Text style={styles.submitBtnText}>Submit</Text>
+           <Text style={inputstyles.submitBtnText}>Submit</Text>
          </TouchableOpacity>
        </View>
      );
@@ -57,9 +57,24 @@ addquestioninput: {
     color: 'black'
   },
   submitBtnText: {
-    color: white,
+    color: 'white',
     fontSize: 22,
     textAlign: 'center',
+  },
+  item: {
+    padding: 10,
+    fontSize: 24,
+    height: 44,
+    textAlign: 'center'
+  },
+  iosSubmitBtn: {
+    backgroundColor: 'red',
+    padding: 10,
+    borderRadius: 7,
+    height: 45,
+    marginLeft: 40,
+    marginTop: 40,
+    marginRight: 40,
   }
 });
 

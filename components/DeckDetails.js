@@ -7,15 +7,14 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native
         
     }
 
-    startQuiz = () => {
-        this.props.navigation.navigate('Quiz'); 
-    }
-
     render() {
-        const { deck } = this.props;
+        const { params } = this.props.navigation.state;
+        let deck = params.deck;
         return (
-            <View style={styles.container} >
+            <View style={styles.container} >          
                 <Text style={styles.item}>Deck Detail</Text>
+                <Text style={styles.heading2}>{JSON.stringify(deck.title)}</Text>
+                <Text style={styles.heading2}>{JSON.stringify(deck.questions.length)} questions</Text>
                 <TouchableOpacity
             style={
              Platform.OS === "ios"
@@ -32,7 +31,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native
                ? styles.iosSubmitBtn
                : styles.AndroidSubmitBtn
            } 
-           onPress={this.startQuiz}
+           onPress={this.submit}
          >
            <Text style={styles.submitBtnText}>Take Quiz</Text>
          </TouchableOpacity>
@@ -68,6 +67,11 @@ const styles = StyleSheet.create({
   heading: {
     color: 'black',
     fontSize: 22,
+    textAlign: 'center',
+  },
+   heading2: {
+    color: 'black',
+    fontSize: 16,
     textAlign: 'center',
   }
 })

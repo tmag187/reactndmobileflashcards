@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
  class Deck extends Component {
     render() {
-        let { deck } = this.props;
+        let { deck, onSelect } = this.props;
         let questCount = deck.questions.length;
         return (
-            <TouchableOpacity style={styles.container} >
+            <TouchableOpacity style={styles.container} onPress={() => this.props.navigation.navigate('Details', {deck: deck})} >
                 <Text style={styles.item} >{deck.title}</Text>
                 <Text>{questCount} questions</Text>
             </TouchableOpacity>
         )
     }
 }
+
+export default withNavigation(Deck);
 
 const styles = StyleSheet.create({
   container: {
@@ -25,5 +28,3 @@ const styles = StyleSheet.create({
     height: 44,
   },
 })
-
-export default Deck;

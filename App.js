@@ -4,6 +4,7 @@ import Decks from './components/Decks';
 import { currentDecks } from './utils/CurrentDecks';
 import  DeckDetails  from './components/DeckDetails';
 import AddDeck from './components/AddDeck';
+import Quiz from './components/Quiz';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
 import { getDecks } from './utils/storage';
 

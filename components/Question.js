@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList,StyleSheet } from 'react-native';
 
-export default class Question extends Component {
+ class Question extends Component {
                  state = {
                    cardFront: true
                  };
@@ -59,3 +59,5 @@ export default class Question extends Component {
                   textAlign: 'center',
                 }
               })
+
+export default Question;
