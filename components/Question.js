@@ -13,12 +13,14 @@ import { View, Text, FlatList,StyleSheet, TouchableOpacity, Platform } from 'rea
 
                  render() {
                    const { cardFront } = this.state;
+                   const { question, update } = this.props;
+                  // const question = deck.questions[0];
                    return (
                      <View>
                        {cardFront === true ? (
-                         <Text>Question</Text>
+                         <Text style={styles.item}>{question.question}</Text>
                        ) : (
-                         <Text>Answer</Text>
+                         <Text style={styles.item}>{question.answer}</Text>
                        )}
                        <TouchableOpacity
                          style={
@@ -34,22 +36,22 @@ import { View, Text, FlatList,StyleSheet, TouchableOpacity, Platform } from 'rea
                        <TouchableOpacity
                          style={
                            Platform.OS === "ios"
-                             ? styles.iosSubmitBtn
+                             ? styles.correctBtn
                              : styles.AndroidSubmitBtn
                          }
-                         onPress={this.submit}
+                         onPress={update}
                        >
-                         <Text style={styles.correctBtn}>Correct</Text>
+                         <Text style={styles.submitBtnText}>Correct</Text>
                        </TouchableOpacity>
                        <TouchableOpacity
                          style={
                            Platform.OS === "ios"
-                             ? styles.iosSubmitBtn
+                             ? styles.incorrectBtn
                              : styles.AndroidSubmitBtn
                          }
-                         onPress={this.submit}
+                         onPress={update}
                        >
-                         <Text style={styles.incorrectBtn}>Incorrect</Text>
+                         <Text style={styles.submitBtnText}>Incorrect</Text>
                        </TouchableOpacity>
                      </View>
                    );
@@ -63,7 +65,7 @@ import { View, Text, FlatList,StyleSheet, TouchableOpacity, Platform } from 'rea
                 },
                 item: {
                   padding: 10,
-                  fontSize: 24,
+                  fontSize: 20,
                   height: 44,
                 },
                 submitBtnText: {
