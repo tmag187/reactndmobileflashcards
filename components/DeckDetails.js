@@ -74,6 +74,17 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginRight: 40,
   },
+  AndroidSubmitBtn: {
+    backgroundColor: purple,
+    padding: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+    height: 45,
+    borderRadius: 2,
+    alignSelf: 'flex-end',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   heading: {
     color: 'black',
     fontSize: 22,

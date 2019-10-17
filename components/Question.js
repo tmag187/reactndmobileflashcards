@@ -39,7 +39,7 @@ import { View, Text, FlatList,StyleSheet, TouchableOpacity, Platform } from 'rea
                              ? styles.correctBtn
                              : styles.AndroidSubmitBtn
                          }
-                         onPress={update}
+                         onPress={()=>update("correct")}
                        >
                          <Text style={styles.submitBtnText}>Correct</Text>
                        </TouchableOpacity>
@@ -49,7 +49,7 @@ import { View, Text, FlatList,StyleSheet, TouchableOpacity, Platform } from 'rea
                              ? styles.incorrectBtn
                              : styles.AndroidSubmitBtn
                          }
-                         onPress={update}
+                         onPress={()=>update("incorrect")}
                        >
                          <Text style={styles.submitBtnText}>Incorrect</Text>
                        </TouchableOpacity>
