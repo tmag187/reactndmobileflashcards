@@ -36,7 +36,9 @@ class Home extends Component {
 
 const HomeStack = createStackNavigator({
   Home: { screen : Home },
-  Details: { screen: DeckDetails}
+  Details: { screen: DeckDetails},
+  Quiz: { screen: Quiz},
+  AddQuestion: { screen: AddQuestion }
 });
 
 const AddDeckStack = createStackNavigator({
