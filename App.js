@@ -16,19 +16,41 @@ const instructions = Platform.select({
 
 class Home extends Component {
 
-  state = { decks:{}};
+  state = { decks:{}, cdm:0};
 
   componentDidMount() {
+    let { cdm } = this.state;
     let decks = getDecks();
-    this.setState({decks:decks});
+    let count = cdm;
+    count++;
+    this.setState({decks:decks, cdm:count});
+  }
+
+  update = () => {
+    let { cdm } = this.state;
+    let count = cdm;
+    count++;
+    this.setState({cdm:count});
   }
 
   render() {
-    let { decks } = this.state;
+    let decks;
+    let path;
+    const { cdm } = this.state;
+    const { params } = this.props.navigation.state;
+    if (params === undefined) {
+        ({ decks } = this.state);
+        path = "state";
+        console.log(JSON.stringify(decks));
+    } else {
+      decks = params.decks;
+      path = "params";
+      console.log(JSON.stringify(decks));
+    }
     return (
       <View style={styles.container}>
-        <Decks decks={decks} />
-        {/* <Text>{JSON.stringify(decks)}</Text> */}
+        <Decks decks={decks} screenProps={this.update} />
+        { <Text>{JSON.stringify(decks)}  {path} {cdm}</Text> }
       </View>
     );
   }

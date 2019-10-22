@@ -4,7 +4,8 @@ import { saveDeck } from '../utils/storage';
 
  class AddDeck extends Component {
    state = {
-     deckName: "new deck"
+     deckName: "new deck",
+     decks:null
    };
    updateName = input => {
      this.setState({ deckName: input });
@@ -12,12 +13,18 @@ import { saveDeck } from '../utils/storage';
 
    submit = () => {
     const { deckName } = this.state; 
+    const { screenProps } = this.props
     let decks = saveDeck(deckName);
-    this.props.navigation.navigate('Home');
+    this.setState({decks});
+    let ndecks = decks.length;
+   // {screenProps.update()}
+   let deck = Object.values(decks[1])[0];
+    this.props.navigation.navigate('Details',{deck:deck});
  }
 
    render() {
-     const { deckName } = this.state;
+     const { deckName, decks } = this.state;
+     const { screenProps } = this.props;
      return (
        <View>
          <Text style={inputstyles.item}>Add Deck</Text>
@@ -35,7 +42,8 @@ import { saveDeck } from '../utils/storage';
            onPress={this.submit}
          >
            <Text style={inputstyles.submitBtnText}>Submit</Text>
-         </TouchableOpacity>
+         </TouchableOpacity>         
+         <Text>{(decks!==null) ? JSON.stringify(Object.values(decks[1])[0]):''}</Text>
        </View>
      );
    }

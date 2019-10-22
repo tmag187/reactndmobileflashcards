@@ -4,11 +4,13 @@ let DECK_STORAGE_KEY = '10111';
 
 let decks;
 export function getDecks() {
+    if (decks===undefined) {
+        decks = (currentDecks()).decks;
+    }
     /* AsyncStorage.getItem(DECK_STORAGE_KEY)
     .then ((results) => {
 
-    } */
-    decks = (currentDecks()).decks;
+    } */  
     return (decks);
 }
 
@@ -17,7 +19,7 @@ export function saveDeck(title) {
     .then ((results) => {
         
     }) */
-    let decks = ((currentDecks()).decks);
+    decks = ((currentDecks()).decks);
     let newDeck = {
         title: {
             title,
