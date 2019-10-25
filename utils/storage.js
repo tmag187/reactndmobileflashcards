@@ -24,7 +24,12 @@ export function saveDeck(title) {
         title: {
             title,
             "questions": [] } }
-    decks = { ...decks, newDeck:newDeck }
+
+    newDeck = {
+      decks4: { title: title, questions: [] }
+    };
+
+    decks = [ ...decks, newDeck ];
     return (decks);
 }
 

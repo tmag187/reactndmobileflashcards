@@ -16,10 +16,10 @@ import { saveDeck } from '../utils/storage';
     const { screenProps } = this.props
     let decks = saveDeck(deckName);
     this.setState({decks});
-    let ndecks = decks.length;
+    let ndecks = Object.values(decks).length - 1;
    // {screenProps.update()}
-   let deck = Object.values(decks[1])[0];
-    this.props.navigation.navigate('Details',{deck:deck});
+     let deck = Object.values(decks[ndecks])[0];
+     this.props.navigation.navigate('Details',{deck:deck});
  }
 
    render() {
@@ -43,7 +43,8 @@ import { saveDeck } from '../utils/storage';
          >
            <Text style={inputstyles.submitBtnText}>Submit</Text>
          </TouchableOpacity>         
-         <Text>{(decks!==null) ? JSON.stringify(Object.values(decks[1])[0]):''}</Text>
+         <Text>{(decks!==null) ? JSON.stringify(Object.values(decks).length):''}</Text>
+         <Text>{(decks!==null) ? JSON.stringify(decks):''}</Text>
        </View>
      );
    }
