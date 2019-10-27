@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Platform, TextInput } from 'react-native';
+import { addCardToDeck } from '../utils/storage';
 
  class AddQuestion extends Component {
 
     state = {
         optionOneText:'',
         optionTwoText:'',
-        toHome:false
+        toHome:false,
+        decks:null
     }
 
     handleSubmit = (e) => {        
-      //  e.preventDefault();
-      //  const { authedUser } = this.props;
+
+        const { deckName } = this.props; 
         const { optionOneText, optionTwoText } = this.state;
         if ((optionOneText === "" || optionTwoText === "")) {
           alert(
@@ -23,13 +25,27 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform, TextInput } from 'r
             optionOneText: optionOneText,
             optionTwoText: optionTwoText
           };
-        //  this.props.dispatch(handleAddQuestion(unformattedQuestion));
-          this.setState({ toHome: "true" });
+
+        
+      //  const { screenProps } = this.props
+       // let decks = saveDeck(deckName);
+      //  this.setState({decks});
+     //   let ndecks = Object.values(decks).length - 1;
+   
+     //   let deck = Object.values(decks[ndecks])[0];
+        decks = addCardToDeck(deckName, unformattedQuestion);
+        this.setState({decks});
+     //   this.props.navigation.navigate('Details');
+
         }
     }
 
-    handleChange = (e) => {
-        this.setState({[e.target.name]:e.target.value});
+    handleChangeOne = (name, input) => {
+        this.setState({optionOneText:input});
+    }
+
+     handleChangeTwo = (name, input) => {
+        this.setState({optionTwoText:input});
     }
 
     componentDidMount() {
@@ -40,15 +56,18 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform, TextInput } from 'r
         if (this.state.toHome) {
             this.props.navigation.navigate('Home');
         }
+        const { params } = this.props.navigation.state;
+        const deckName = params.deckName;
+        const { decks } = this.state;
         return (
             
             <View>
                 <Text style={inputstyles.item}>Add a Question</Text>
-                <Text style={inputstyles.item}>to the deck...</Text>
+                <Text style={inputstyles.item}>to the deck...{deckName}</Text>
                  <Text style={inputstyles.item}>Question</Text>      
-                <TextInput style={inputstyles.addquestioninput} value={this.state.optionOneText} name='optionOneText' onChange={this.handleChange} />
+                <TextInput style={inputstyles.addquestioninput} value={this.state.optionOneText} name='optionOneText' onChangeText={this.handleChangeOne} />
                 <Text style={inputstyles.item}>Answer</Text> 
-                <TextInput style={inputstyles.addquestioninput} name='optionTwoText' value={this.state.optionTwoText} onChange={this.handleChange} />
+                <TextInput style={inputstyles.addquestioninput} name='optionTwoText' value={this.state.optionTwoText} onChangeText={this.handleChangeTwo} />
                 <TouchableOpacity
             style={
              Platform.OS === "ios"
@@ -59,6 +78,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform, TextInput } from 'r
          >
            <Text style={inputstyles.submitBtnText}>Submit</Text>
          </TouchableOpacity>
+          <Text>{(decks!==null) ? JSON.stringify(decks):''}</Text>
             </View>
         )
     }

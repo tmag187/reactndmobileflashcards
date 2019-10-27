@@ -19,7 +19,9 @@ export function saveDeck(title) {
     .then ((results) => {
         
     }) */
-    decks = ((currentDecks()).decks);
+    if (decks===undefined) {
+       decks = ((currentDecks()).decks);
+    }
     let newDeck = {
         title: {
             title,
@@ -38,4 +40,15 @@ export function setDecks(title) {
     .then ((results) => {
         
     })
+}
+
+export function addCardToDeck(title, card) {
+    /* AsyncStorage.mergeItem(DECK_STORAGE_KEY, title)
+    .then ((results) => {
+        
+    }) */
+    if (decks[title]!==undefined) {
+        decks[title].question.push(card);
+    }
+    return (decks);
 }
