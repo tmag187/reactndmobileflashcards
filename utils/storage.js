@@ -23,13 +23,9 @@ export function saveDeck(title) {
        decks = ((currentDecks()).decks);
     }
     let newDeck = {
-        title: {
-            title,
-            "questions": [] } }
-
-    newDeck = {
-      decks4: { title: title, questions: [] }
-    };
+        [title]: {
+            title:title,
+            questions: [] } }
 
     decks = [ ...decks, newDeck ];
     return (decks);
@@ -47,8 +43,15 @@ export function addCardToDeck(title, card) {
     .then ((results) => {
         
     }) */
-    if (decks[title]!==undefined) {
-        decks[title].question.push(card);
-    }
+    let question = {
+                "question":"what is React?",
+                "answer":"A library for managing user interfaces."
+            };
+    decks.map((deck) => {
+        if (deck[title]!==undefined) {
+            deck[title].questions.push(question)
+        }
+    })
+    
     return (decks);
 }

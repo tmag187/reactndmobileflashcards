@@ -7,13 +7,12 @@ import { addCardToDeck } from '../utils/storage';
     state = {
         optionOneText:'',
         optionTwoText:'',
-        toHome:false,
         decks:null
     }
 
     handleSubmit = (e) => {        
-
-        const { deckName } = this.props; 
+        const { params } = this.props.navigation.state;
+        const deckName = params.deckName; 
         const { optionOneText, optionTwoText } = this.state;
         if ((optionOneText === "" || optionTwoText === "")) {
           alert(
@@ -25,19 +24,10 @@ import { addCardToDeck } from '../utils/storage';
             optionOneText: optionOneText,
             optionTwoText: optionTwoText
           };
-
-        
-      //  const { screenProps } = this.props
-       // let decks = saveDeck(deckName);
-      //  this.setState({decks});
-     //   let ndecks = Object.values(decks).length - 1;
-   
-     //   let deck = Object.values(decks[ndecks])[0];
-        decks = addCardToDeck(deckName, unformattedQuestion);
-        this.setState({decks});
-     //   this.props.navigation.navigate('Details');
-
-        }
+          let decks = addCardToDeck(deckName, unformattedQuestion);
+          this.setState({decks});
+       //   this.props.navigation.navigate('Details',{deck:deck, decks:decks});
+        }   
     }
 
     handleChangeOne = (name, input) => {
@@ -49,16 +39,15 @@ import { addCardToDeck } from '../utils/storage';
     }
 
     componentDidMount() {
-   //   localStorage.setItem('lastpage', 'add');
+
     }
 
     render() {
-        if (this.state.toHome) {
-            this.props.navigation.navigate('Home');
-        }
+
         const { params } = this.props.navigation.state;
-        const deckName = params.deckName;
-        const { decks } = this.state;
+        const deckName = params.deckName; 
+        const decks = params.decks;
+        const ndecks = decks.length - 1;
         return (
             
             <View>
@@ -78,7 +67,8 @@ import { addCardToDeck } from '../utils/storage';
          >
            <Text style={inputstyles.submitBtnText}>Submit</Text>
          </TouchableOpacity>
-          <Text>{(decks!==null) ? JSON.stringify(decks):''}</Text>
+         <Text style={inputstyles.logText}>{(decks!==null) ? JSON.stringify(decks[ndecks]):''}</Text>
+         <Text style={inputstyles.logText}>{(decks!==null) ? JSON.stringify(decks):''}</Text>
             </View>
         )
     }
@@ -91,11 +81,13 @@ const inputstyles = StyleSheet.create({
     addquestioninput: {
         backgroundColor: 'white',
         justifyContent: 'top',
-        width:350,
+        width:250,
         padding:8,
         height:44,
         fontSize: 18,
-        margin:20,
+        marginLeft: 40,
+        marginTop: 10,
+        marginRight: 40,
         borderWidth:1,
         borderStyle: 'solid',
         borderColor: '#757575',
@@ -112,13 +104,17 @@ const inputstyles = StyleSheet.create({
         height: 44,
         textAlign: 'center'
       },
+      logText: {
+        padding: 10,
+        fontSize: 10
+      },
       iosSubmitBtn: {
         backgroundColor: 'red',
         padding: 10,
         borderRadius: 7,
         height: 45,
         marginLeft: 40,
-        marginTop: 40,
+        marginTop: 10,
         marginRight: 40,
       }
     });
