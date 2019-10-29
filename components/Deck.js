@@ -4,10 +4,10 @@ import { withNavigation } from 'react-navigation';
 
  class Deck extends Component {
     render() {
-        let { deck, onSelect } = this.props;
+        let { deck, onSelect, decks } = this.props;
         let questCount = deck.questions.length;
         return (
-            <TouchableOpacity style={styles.container} onPress={() => this.props.navigation.navigate('Details', {deck: deck})} >
+            <TouchableOpacity style={styles.container} onPress={() => this.props.navigation.navigate('Details', {deck: deck, decks:decks})} >
                 <Text style={styles.item} >{deck.title}</Text>
                 <Text>{questCount} questions</Text>
             </TouchableOpacity>

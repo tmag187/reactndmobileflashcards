@@ -17,7 +17,7 @@ import { saveDeck } from '../utils/storage';
     let decks = saveDeck(deckName);
     this.setState({decks});
     let ndecks = Object.values(decks).length - 1;
-   // {screenProps.update()}
+  //  {screenProps.update()}
      let deck = Object.values(decks[ndecks])[0];
      this.props.navigation.navigate('Details',{deck:deck, decks:decks});
  }

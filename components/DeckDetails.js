@@ -14,13 +14,18 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native
       this.props.navigation.navigate('Quiz', {deck:deck, decks:decks}); 
     }
 
-    addQuestion = (deckName) => {
-      this.props.navigation.navigate('AddQuestion', {deckName:deckName}); 
+    addQuestion = () => {
+      const { params } = this.props.navigation.state;
+      let deck = params.deck;
+      let deckName = deck.title;
+      let decks = params.decks;
+      this.props.navigation.navigate('AddQuestion', {deckName:deckName, decks:decks}); 
     }
 
     render() {
         const { params } = this.props.navigation.state;
         let deck = params.deck;
+        let deckName = deck.title;
         return (
             <View style={styles.container} >          
                 <Text style={styles.item}>Deck Detail</Text>
@@ -32,7 +37,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native
                ? styles.iosSubmitBtn
                : styles.AndroidSubmitBtn
            } 
-           onPress={this.addQuestion(deck.title)}
+           onPress={this.addQuestion}
          >
            <Text style={styles.submitBtnText}>Add Card</Text>
          </TouchableOpacity>
@@ -76,7 +81,7 @@ const styles = StyleSheet.create({
     marginRight: 40,
   },
   AndroidSubmitBtn: {
-    backgroundColor: purple,
+    backgroundColor: 'purple',
     padding: 10,
     paddingLeft: 30,
     paddingRight: 30,

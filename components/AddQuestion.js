@@ -13,6 +13,7 @@ import { addCardToDeck } from '../utils/storage';
     handleSubmit = (e) => {        
         const { params } = this.props.navigation.state;
         const deckName = params.deckName; 
+        let unformattedQuestion;
         const { optionOneText, optionTwoText } = this.state;
         if ((optionOneText === "" || optionTwoText === "")) {
           alert(
@@ -20,21 +21,25 @@ import { addCardToDeck } from '../utils/storage';
           );
         } else {
 
-          let unformattedQuestion = {
-            optionOneText: optionOneText,
-            optionTwoText: optionTwoText
+          unformattedQuestion = {
+            question: optionOneText,
+            answer: optionTwoText
           };
           let decks = addCardToDeck(deckName, unformattedQuestion);
           this.setState({decks});
-       //   this.props.navigation.navigate('Details',{deck:deck, decks:decks});
+          let ndecks = Object.values(decks).length - 1;
+           //  {screenProps.update()}
+          let deck = Object.values(decks[ndecks])[0];
+          this.setState({optionOneText:'',optionTwoText:''});
+        //  this.props.navigation.navigate('Details',{deck:deck, decks:decks});
         }   
     }
 
-    handleChangeOne = (name, input) => {
+    handleChangeOne = (input) => {
         this.setState({optionOneText:input});
     }
 
-     handleChangeTwo = (name, input) => {
+     handleChangeTwo = (input) => {
         this.setState({optionTwoText:input});
     }
 
@@ -45,6 +50,7 @@ import { addCardToDeck } from '../utils/storage';
     render() {
 
         const { params } = this.props.navigation.state;
+        const { optionOneText, optionTwoText } = this.state;
         const deckName = params.deckName; 
         const decks = params.decks;
         const ndecks = decks.length - 1;
@@ -67,6 +73,7 @@ import { addCardToDeck } from '../utils/storage';
          >
            <Text style={inputstyles.submitBtnText}>Submit</Text>
          </TouchableOpacity>
+         <Text style={inputstyles.logText}>{(decks!==null) ? JSON.stringify((optionOneText + ' ' + optionTwoText)):''}</Text>
          <Text style={inputstyles.logText}>{(decks!==null) ? JSON.stringify(decks[ndecks]):''}</Text>
          <Text style={inputstyles.logText}>{(decks!==null) ? JSON.stringify(decks):''}</Text>
             </View>

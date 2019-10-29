@@ -30,12 +30,11 @@ import  Deck from './Deck';
                 
                   <FlatList 
                    data={Object.values(decks)}
-                   renderItem={({item}) => <Deck style={styles.item} deck={(Object.values(item)[0])} 
+                   renderItem={({item}) => <Deck style={styles.item} decks={decks} deck={(Object.values(item)[0])} 
                     />}
                    extraData={this.state}
                    keyExtractor={item => (Object.values(item)[0]).id}
                 />
-                <Text>{clickCount}</Text>
                 <Text>{this.props.navigation}</Text>
             </SafeAreaView>
         )
