@@ -6,11 +6,12 @@ let decks;
 export function getDecks() {
     if (decks===undefined) {
         decks = (currentDecks()).decks;
-    }
-    /* AsyncStorage.getItem(DECK_STORAGE_KEY)
+    } else {
+     AsyncStorage.getItem(DECK_STORAGE_KEY)
     .then ((results) => {
-
-    } */  
+      decks = results
+    })   
+    }
     return (decks);
 }
 
@@ -27,7 +28,7 @@ export function saveDeck(title) {
             title:title,
             questions: [] } }
 
-    decks = { ...decks, [title]:newDeck };
+    decks = [ ...decks,newDeck ];
     return (decks);
 }
 
@@ -43,13 +44,10 @@ export function addCardToDeck(title, card) {
     .then ((results) => {
         
     }) */
-    let question = {
-                "question":"what is React?",
-                "answer":"A library for managing user interfaces."
-            };
+
     decks.map((deck) => {
         if (deck[title]!==undefined) {
-            deck[title].questions.push(question)
+            deck[title].questions.push(card);
         }
     })
     

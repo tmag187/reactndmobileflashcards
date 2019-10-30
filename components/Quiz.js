@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList,StyleSheet, Platform, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList,StyleSheet, Platform, TouchableOpacity, Keyboard } from 'react-native';
 import Question from './Question';
 
 export default class Quiz extends Component {
@@ -37,7 +37,7 @@ export default class Quiz extends Component {
                 <Question question={questions[questionNumber]} update={this.nextQuestion} /> :
                 <View>
                 <Text style={styles.item}>Congratulations Quiz is Complete</Text>
-                <Text style={styles.item}>{correct} out of {questionCount} Correct ({correct/questionCount*100}%)</Text>
+                <Text style={styles.item}>{correct} out of {questionCount} Correct ({(correct/questionCount*100).toFixed(1)}%)</Text>
                 <TouchableOpacity
                          style={
                            Platform.OS === "ios"
@@ -49,7 +49,7 @@ export default class Quiz extends Component {
                          <Text style={styles.submitBtnText}>Continue</Text>
                        </TouchableOpacity>
                 </View>}
-                
+                <Text style={styles.logText}>{(deck!==null) ? JSON.stringify(deck):''}</Text>
             </View>
         )
     }
@@ -78,5 +78,9 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     marginTop: 40,
     marginRight: 40,
-  }               
+  },
+  logText: {
+        padding: 10,
+        fontSize: 14
+      }               
 });

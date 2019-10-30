@@ -26,16 +26,17 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native
         const { params } = this.props.navigation.state;
         let deck = params.deck;
         let deckName = deck.title;
+        let nquestions = deck.questions.length;
         return (
             <View style={styles.container} >          
                 <Text style={styles.item}>Deck Detail</Text>
                 <Text style={styles.heading2}>{JSON.stringify(deck.title)}</Text>
-                <Text style={styles.heading2}>{JSON.stringify(deck.questions.length)} questions</Text>
+                <Text style={styles.heading2}>{JSON.stringify(nquestions)} questions</Text>
                 <TouchableOpacity
             style={
              Platform.OS === "ios"
                ? styles.iosSubmitBtn
-               : styles.AndroidSubmitBtn
+               : styles.androidSubmitBtn
            } 
            onPress={this.addQuestion}
          >
@@ -45,8 +46,9 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native
             style={
              Platform.OS === "ios"
                ? styles.iosSubmitBtn
-               : styles.AndroidSubmitBtn
+               : styles.androidSubmitBtn
            } 
+           disabled={(nquestions===0) ? true:false}
            onPress={this.takeQuiz}
          >
            <Text style={styles.submitBtnText}>Take Quiz</Text>
@@ -80,6 +82,15 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginRight: 40,
   },
+      androidSubmitBtn: {
+        backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 7,
+        height: 45,
+        marginLeft: 40,
+        marginTop: 10,
+        marginRight: 40
+      },
   AndroidSubmitBtn: {
     backgroundColor: 'purple',
     padding: 10,

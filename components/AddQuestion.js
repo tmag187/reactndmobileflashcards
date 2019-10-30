@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Platform, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform, TextInput, Keyboard } from 'react-native';
 import { addCardToDeck } from '../utils/storage';
 
  class AddQuestion extends Component {
@@ -17,7 +17,7 @@ import { addCardToDeck } from '../utils/storage';
         const { optionOneText, optionTwoText } = this.state;
         if ((optionOneText === "" || optionTwoText === "")) {
           alert(
-            " Both answers must be entered to submit the question."
+            " Both fields must be poulated to submit the question."
           );
         } else {
 
@@ -27,12 +27,21 @@ import { addCardToDeck } from '../utils/storage';
           };
           let decks = addCardToDeck(deckName, unformattedQuestion);
           this.setState({decks});
-          let ndecks = Object.values(decks).length - 1;
-           //  {screenProps.update()}
-          let deck = Object.values(decks[ndecks])[0];
+          
+          
           this.setState({optionOneText:'',optionTwoText:''});
-        //  this.props.navigation.navigate('Details',{deck:deck, decks:decks});
-        }   
+        
+        }  
+        Keyboard.dismiss(); 
+    }
+
+    returnToCard = () => {
+      const { decks } = this.state;
+      let ndecks = Object.values(decks).length - 1;
+           //  {screenProps.update()}
+      let deck = Object.values(decks[ndecks])[0];
+      this.props.navigation.navigate('Details',{deck:deck, decks:decks});
+      
     }
 
     handleChangeOne = (input) => {
@@ -67,11 +76,21 @@ import { addCardToDeck } from '../utils/storage';
             style={
              Platform.OS === "ios"
                ? inputstyles.iosSubmitBtn
-               : inputstyles.AndroidSubmitBtn
+               : inputstyles.androidSubmitBtn
            } 
            onPress={this.handleSubmit}
          >
-           <Text style={inputstyles.submitBtnText}>Submit</Text>
+           <Text style={inputstyles.submitBtnText}>Add Question</Text>
+         </TouchableOpacity>
+         <TouchableOpacity
+            style={
+             Platform.OS === "ios"
+               ? inputstyles.iosSubmitBtn
+               : inputstyles.androidSubmitBtn
+           } 
+           onPress={this.returnToCard}
+         >
+           <Text style={inputstyles.submitBtnText}>Return to Card</Text>
          </TouchableOpacity>
          <Text style={inputstyles.logText}>{(decks!==null) ? JSON.stringify((optionOneText + ' ' + optionTwoText)):''}</Text>
          <Text style={inputstyles.logText}>{(decks!==null) ? JSON.stringify(decks[ndecks]):''}</Text>
@@ -122,7 +141,16 @@ const inputstyles = StyleSheet.create({
         height: 45,
         marginLeft: 40,
         marginTop: 10,
-        marginRight: 40,
+        marginRight: 40
+      },
+      androidSubmitBtn: {
+        backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 7,
+        height: 45,
+        marginLeft: 40,
+        marginTop: 10,
+        marginRight: 40
       }
     });
 
