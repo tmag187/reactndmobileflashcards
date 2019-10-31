@@ -6,7 +6,6 @@ import  Deck from './Deck';
 
    state = { clickCount: 0, navigationObj:null }
    onSelect = (e) => {
-   //  console.log(e.target.value);
      let { clickCount, navigationObj } = this.state;
      clickCount = clickCount + 1;
      this.setState({clickCount:clickCount});
@@ -35,7 +34,6 @@ import  Deck from './Deck';
                    extraData={this.state}
                    keyExtractor={item => (Object.values(item)[0]).id}
                 />
-                <Text>{this.props.navigation}</Text>
             </SafeAreaView>
         )
     }

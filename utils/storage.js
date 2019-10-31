@@ -6,12 +6,7 @@ let decks;
 export function getDecks() {
     if (decks===undefined) {
         decks = (currentDecks()).decks;
-    } else {
-     AsyncStorage.getItem(DECK_STORAGE_KEY)
-    .then ((results) => {
-      decks = results
-    })   
-    }
+    } 
     return (decks);
 }
 

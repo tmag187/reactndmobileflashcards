@@ -26,9 +26,7 @@ import { addCardToDeck } from '../utils/storage';
             answer: optionTwoText
           };
           let decks = addCardToDeck(deckName, unformattedQuestion);
-          this.setState({decks});
-          
-          
+          this.setState({decks});    
           this.setState({optionOneText:'',optionTwoText:''});
         
         }  

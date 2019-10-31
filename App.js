@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import Decks from './components/Decks';
+import Home from './components/Home';
 import { currentDecks } from './utils/CurrentDecks';
 import  DeckDetails  from './components/DeckDetails';
 import AddDeck from './components/AddDeck';
 import Quiz from './components/Quiz';
 import AddQuestion from './components/AddQuestion';
-import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createAppContainer, createStackNavigator, withNavigation } from 'react-navigation';
 import { getDecks } from './utils/storage';
 
 const instructions = Platform.select({
@@ -14,47 +15,7 @@ const instructions = Platform.select({
   android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu',
 });
 
-class Home extends Component {
 
-  state = { decks:{}, cdm:0};
-
-  componentDidMount() {
-    let { cdm } = this.state;
-    let decks = getDecks();
-    let count = cdm;
-    count++;
-    this.setState({decks:decks, cdm:count});
-  }
-
-  update = () => {
-    let { cdm } = this.state;
-    let count = cdm;
-    count++;
-    this.setState({cdm:count});
-  }
-
-  render() {
-    let decks;
-    let path;
-    const { cdm } = this.state;
-    const { params } = this.props.navigation.state;
-    if (params === undefined) {
-        ({ decks } = this.state);
-        path = "state";
-        console.log(JSON.stringify(decks));
-    } else {
-      decks = params.decks;
-      path = "params";
-      console.log(JSON.stringify(decks));
-    }
-    return (
-      <View style={styles.container}>
-        <Decks decks={decks} screenProps={this.update} />
-        { <Text>{JSON.stringify(decks)}  {path} {cdm}</Text> }
-      </View>
-    );
-  }
-}
 
 const HomeStack = createStackNavigator({
   Home: { screen : Home },
@@ -64,10 +25,7 @@ const HomeStack = createStackNavigator({
 });
 
 const AddDeckStack = createStackNavigator({
-  AddDeck: { screen : AddDeck },
-  Details: { screen: DeckDetails},
-  Quiz: { screen: Quiz},
-  AddQuestion: { screen: AddQuestion }
+  AddDeck: { screen : AddDeck }
 });
 
 const tabNavigator = createBottomTabNavigator({
@@ -80,7 +38,8 @@ const tabNavigator = createBottomTabNavigator({
       activeTintColor:'tomato',
       inactiveTintColor:'gray',
       labelStyle: {
-        fontSize: 20,
+        fontSize: 24,
+        paddingBottom:10
       },
       style: {
         height:56,
@@ -99,21 +58,4 @@ const tabNavigator = createBottomTabNavigator({
 
 export default createAppContainer(tabNavigator)
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+

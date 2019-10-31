@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList,StyleSheet, Platform, TouchableOpacity, Keyboard } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import Question from './Question';
 
 export default class Quiz extends Component {
@@ -44,7 +45,7 @@ export default class Quiz extends Component {
                              ? styles.iosSubmitBtn
                              : styles.AndroidSubmitBtn
                          }
-                         
+                         onPress={()=>this.props.navigation.dispatch(NavigationActions.back())}
                        >
                          <Text style={styles.submitBtnText}>Continue</Text>
                        </TouchableOpacity>

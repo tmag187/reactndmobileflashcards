@@ -16,6 +16,7 @@ import { saveDeck } from '../utils/storage';
     const { screenProps } = this.props
     let decks = saveDeck(deckName);
     this.setState({decks});
+    this.setState({deckName:''});
     let ndecks = Object.values(decks).length - 1;
   //  {screenProps.update()}
      let deck = Object.values(decks[ndecks])[0];
@@ -37,7 +38,7 @@ import { saveDeck } from '../utils/storage';
             style={
              Platform.OS === "ios"
                ? inputstyles.iosSubmitBtn
-               : inputstyles.AndroidSubmitBtn
+               : inputstyles.androidSubmitBtn
            } 
            onPress={this.submit}
          >
@@ -76,6 +77,15 @@ addquestioninput: {
     height: 44,
     textAlign: 'center'
   },
+  androidSubmitBtn: {
+        backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 7,
+        height: 45,
+        marginLeft: 40,
+        marginTop: 10,
+        marginRight: 40
+      },
   iosSubmitBtn: {
     backgroundColor: 'red',
     padding: 10,
