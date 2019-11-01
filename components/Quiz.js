@@ -50,7 +50,6 @@ export default class Quiz extends Component {
                          <Text style={styles.submitBtnText}>Continue</Text>
                        </TouchableOpacity>
                 </View>}
-                <Text style={styles.logText}>{(deck!==null) ? JSON.stringify(deck):''}</Text>
             </View>
         )
     }

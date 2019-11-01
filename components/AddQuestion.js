@@ -90,9 +90,6 @@ import { addCardToDeck } from '../utils/storage';
          >
            <Text style={inputstyles.submitBtnText}>Return to Card</Text>
          </TouchableOpacity>
-         <Text style={inputstyles.logText}>{(decks!==null) ? JSON.stringify((optionOneText + ' ' + optionTwoText)):''}</Text>
-         <Text style={inputstyles.logText}>{(decks!==null) ? JSON.stringify(decks[ndecks]):''}</Text>
-         <Text style={inputstyles.logText}>{(decks!==null) ? JSON.stringify(decks):''}</Text>
             </View>
         )
     }

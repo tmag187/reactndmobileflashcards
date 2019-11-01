@@ -44,8 +44,6 @@ import { saveDeck } from '../utils/storage';
          >
            <Text style={inputstyles.submitBtnText}>Submit</Text>
          </TouchableOpacity>         
-         <Text>{(decks!==null) ? JSON.stringify(Object.values(decks).length):''}</Text>
-         <Text>{(decks!==null) ? JSON.stringify(decks):''}</Text>
        </View>
      );
    }

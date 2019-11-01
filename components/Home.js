@@ -53,7 +53,6 @@ class Home extends Component {
     return (
       <View style={styles.container}>
         <Decks decks={decks} screenProps={this.update} />
-        { <Text>  {path} {cdm}</Text> }
       </View>
     );
   }
