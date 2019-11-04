@@ -53,14 +53,14 @@ const inputstyles = StyleSheet.create({
 
 addquestioninput: {
     backgroundColor: 'white',
-    justifyContent: 'top',
+    justifyContent: 'center',
     width:200,
     padding:8,
     height:44,
     fontSize: 18,
     margin:50,
     borderWidth:1,
-    borderStyle: 'solid',
+    borderStyle: 'solid'
     borderColor: '#757575',
     color: 'black'
   },

@@ -101,7 +101,7 @@ const inputstyles = StyleSheet.create({
 
     addquestioninput: {
         backgroundColor: 'white',
-        justifyContent: 'top',
+        justifyContent: 'center',
         width:250,
         padding:8,
         height:44,
